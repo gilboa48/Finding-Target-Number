@@ -1,16 +1,15 @@
-const array = [1,1,1,2,3,4,5,6];
+const array = [1,2,3,4,5,6];
 const targetNumber = 7;
 
 let z = 0;
 let num1 = array[z];
-let answer = [];
+let checkArray = [];
 
 const findTargetNumber = ((num,arr) =>{	
 	for (item of arr) {
 		//debugger	
 		if (num + item === targetNumber && z !== arr.indexOf(item) && z<arr.length && checkDoubles([num,item])!== 1){
-			answer = [num,item];
-			console.log (answer);
+			console.log ([num,item]);
 			z += 1;
 			num = arr[z];
 			findTargetNumber(num,arr);
@@ -26,9 +25,12 @@ const findTargetNumber = ((num,arr) =>{
 //checking if arrays have the same numbers
 
 const checkDoubles = (arr => {
-	if (arr[0]===answer[0] || arr[0]===answer[1]){
-		return 1;
-	} 
+	for (i=0; i<checkArray.length; i++) { 
+		if (checkArray[i] === arr[0]){	
+			return 1;
+		} 
+	}
+	checkArray = checkArray.concat(arr);
 });
 
 findTargetNumber(num1,array);
